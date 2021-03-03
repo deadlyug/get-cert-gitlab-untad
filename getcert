@@ -1,0 +1,5 @@
+while ! echo -n | openssl s_client -connect gitlab.untad.ac.id:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > gitlab-untad.cert 
+do 
+  echo "try to get gitlab-untad.crt again" 
+done
+git config --global http."https://gitlab.untad.ac.id/".sslCAinfo $(pwd)/gitlab-untad.cert
